@@ -7,8 +7,6 @@ teams.forEach(function(element){
   shuffledTeams.push(element);
 });
 shuffledTeams = shuffledTeams.sort(function(a, b){return 0.5 - Math.random()});
-console.log(teams);
-console.log(shuffledTeams);
 
 function start(){
   oneShift();
@@ -38,17 +36,29 @@ function circleShift(weeks){
   var finalMessage = "";
   for(var i = 0; i < weeks; i++){
     finalMessage = finalMessage + "<strong>Week number " + (i + 1).toString() + ":</strong> </br>";
-    for(var j = 0; j < Math.floor(shuffledTeams.length); j += 2){
-      console.log((j + i), shuffledTeams.length);
-      if(((j + i + 1) > shuffledTeams.length) && ((j + i) > shuffledTeams.length)){
-        finalMessage = finalMessage + shuffledTeams[(j + i) - (shuffledTeams.length)] + " against " + shuffledTeams[(j + i + 1) - (shuffledTeams.length)] + "</br>";
-      }else if((j + i) > shuffledTeams.length){
-        finalMessage = finalMessage + shuffledTeams[(j + i) - (shuffledTeams.length)] + " against " + shuffledTeams[j + i + 1] + "</br>";
-      }else if(((j + i + 1) > shuffledTeams.length)){
-        finalMessage = finalMessage + shuffledTeams[j + i] + " against " + shuffledTeams[(j + i + 1) - (shuffledTeams.length)] + "</br>";
+    var messageArray = [];
+    for(var j = 0; j < Math.floor(shuffledTeams.length); j ++){
+      var calculationCircle = j + i;
+
+      if((calculationCircle % 2) == 0){
+        calculationCircle -= 2;
       }else{
-        finalMessage = finalMessage + shuffledTeams[j + i] + " against " + shuffledTeams[j + i + 1] + "</br>";
+        calculationCircle += 2;
       }
+
+      if(calculationCircle > shuffledTeams.length){
+        calculationCircle = 0;
+      }else if(calculationCircle < 0){
+        calculationCircle = shuffledTeams.length -1;
+      }
+
+      messageArray.push(shuffledTeams[calculationCircle]);
+
+      console.log(calculationCircle);
+    }
+    console.log();
+    for(var k = 0; k < messageArray.length; k += 2){
+      finalMessage = finalMessage + messageArray[k] + " against " + messageArray[k + 1] + "</br>";
     }
   }
   document.getElementById("funDiv").innerHTML = finalMessage;
