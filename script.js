@@ -2,22 +2,13 @@
 //winnie_the_pooh = whoomy_whoomy
 
 var teams = ["Lions", "Cowboys", "Eagles", "Giants", "Rams", "Seahawks", "49ers", "Saints", "Falcons", "Buccaneers", "Ravens", "Steelers", "Patriots", "Jets", "Cheifs", "Broncos", "Titans", "Jaguars"];
-var shuffledTeams = shuffle(teams);
-
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-}
+var shuffledTeams = [];
+teams.forEach(function(element){
+  shuffledTeams.push(element);
+});
+shuffledTeams = shuffledTeams.sort(function(a, b){return 0.5 - Math.random()});
+console.log(teams);
+console.log(shuffledTeams);
 
 function start(){
   oneShift();
