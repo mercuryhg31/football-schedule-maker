@@ -17,14 +17,14 @@ function oneShift(weeks){
   var weeks = prompt("Number of weeks?");
   var finalMessage = "";
   for(var i = 0; i < weeks; i++){
-    finalMessage = finalMessage + "<strong>Week number " + (i + 1).toString() + ":</strong> </br>";
+    finalMessage += "<strong>Week number " + (i + 1).toString() + ":</strong> </br>";
     for(var j = 0; j < Math.floor(shuffledTeams.length/2); j++){
       var calculation = (j + i + 9);
       //console.log(calculation);
       if(calculation <= (shuffledTeams.length - 1)){
-        finalMessage = finalMessage + shuffledTeams[j] + " against " + shuffledTeams[calculation] + "</br>";
+        finalMessage += shuffledTeams[j] + " against " + shuffledTeams[calculation] + "</br>";
       }else{
-        finalMessage = finalMessage + shuffledTeams[j] + " against " + shuffledTeams[calculation - (shuffledTeams.length/2)] + "</br>";
+        finalMessage += shuffledTeams[j] + " against " + shuffledTeams[calculation - (shuffledTeams.length/2)] + "</br>";
       }
     }
   }
@@ -35,7 +35,7 @@ function circleShift(weeks){
   var weeks = prompt("Number of weeks?");
   var finalMessage = "";
   for(var i = 0; i < weeks; i++){
-    finalMessage = finalMessage + "<strong>Week number " + (i + 1).toString() + ":</strong> </br>";
+    finalMessage += "<strong>Week number " + (i + 1).toString() + ":</strong> </br>";
     var messageArray = [];
     for(var j = 0; j < Math.floor(shuffledTeams.length); j ++){
     //   var calculationCircle = j + (2*i);
@@ -85,8 +85,37 @@ function circleShift(weeks){
     //   messageArray.push(element);
     // });
     for(var k = 0; k < messageArray.length; k += 2){
-      finalMessage = finalMessage + messageArray[k] + " against " + messageArray[k + 1] + "</br>";
+      finalMessage += messageArray[k] + " against " + messageArray[k + 1] + "</br>";
     }
   }
   document.getElementById("funDiv").innerHTML = finalMessage;
+}
+
+var arr1 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+// var arr2 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+var arr2 = [];
+
+if (((arr1.length/2) % 2) != 0) {
+  arr1.push("BYE");
+}
+
+arr1.forEach(function(element){
+  arr2.push(element);
+});
+
+var weeks = prompt("Number of weeks?");
+
+function circle() {
+  var output = "";
+  
+  for (var i = 0; i < weeks; i++) {
+    output += "<b>Week # " + (i-1) + "</b><br/>";
+    for (var j = 0; j < arr1.length; j++) {
+      var /*f, */s;
+      if (j == (arr1.length - 1)) {
+        s = 0;
+      } else { s = j + 1; }
+      output += arr1[j] + " VS " + arr1[s];
+    }
+  }
 }
