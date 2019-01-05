@@ -38,25 +38,26 @@ function circleShift(weeks){
     finalMessage = finalMessage + "<strong>Week number " + (i + 1).toString() + ":</strong> </br>";
     var messageArray = [];
     for(var j = 0; j < Math.floor(shuffledTeams.length); j ++){
-      var calculationCircle = j + i;
-
+      var calculationCircle = j + (2*i);
+      console.log(calculationCircle, i, 1);
       if((calculationCircle % 2) == 0){
-        calculationCircle -= 2;
+        calculationCircle -= (2 * i);
       }else{
-        calculationCircle += 2;
+        calculationCircle += (2 * i);
       }
+      console.log(calculationCircle, i, 2);
 
-      if(calculationCircle > shuffledTeams.length){
+      if(calculationCircle > shuffledTeams.length - 1){
         calculationCircle = 0;
-      }else if(calculationCircle < 0){
-        calculationCircle = shuffledTeams.length -1;
+      }else if(calculationCircle < 0 && i !== 0){
+        calculationCircle = shuffledTeams.length - 1;
       }
+      console.log(calculationCircle, i, 3);
 
       messageArray.push(shuffledTeams[calculationCircle]);
 
-      console.log(calculationCircle);
+      //console.log(calculationCircle);
     }
-    console.log();
     for(var k = 0; k < messageArray.length; k += 2){
       finalMessage = finalMessage + messageArray[k] + " against " + messageArray[k + 1] + "</br>";
     }
