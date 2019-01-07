@@ -95,27 +95,99 @@ var arr1 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 // var arr2 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 var arr2 = [];
 
-if (((arr1.length/2) % 2) != 0) {
-  arr1.push("BYE");
-}
+// if (((arr1.length/2) % 2) != 0) {
+//   arr1.push("BYE");
+// }
 
 arr1.forEach(function(element){
   arr2.push(element);
 });
 
-var weeks = prompt("Number of weeks?");
-
 function circle() {
+  var weeks = prompt("Number of weeks?");
   var output = "";
   
   for (var i = 0; i < weeks; i++) {
-    output += "<b>Week # " + (i-1) + "</b><br/>";
-    for (var j = 0; j < arr1.length; j++) {
+    output += "<b>Week # " + (i+1) + "</b><br/>";
+    for (var j = 0; j < arr1.length - 1; j+=2) {
       var /*f, */s;
       if (j == (arr1.length - 1)) {
         s = 0;
-      } else { s = j + 1; }
-      output += arr1[j] + " VS " + arr1[s];
+      } else { s = j + 1 + i; }
+      output += arr1[j] + " VS " + arr1[s] + "<br/>";
     }
   }
+  
+  document.getElementById('funDiv').innerHTML = output;
 }
+
+var arr = [
+  
+  0, 5,
+  1, 6,
+  2, 7,
+  3, 8,
+  4, 9
+  
+  ]
+
+var arr1 = [
+  0,
+  1,
+  2,
+  3,
+  4
+  ];
+
+var arr2 = [
+  5,
+  6,
+  7,
+  8,
+  9
+  ]
+
+var temp = arr1[0];
+
+arr1[0] = arr1[1];
+arr1[1] = arr1[2];
+arr1[2] = arr1[3];
+arr1[3] = arr1[4];
+
+arr1[4] = arr2[4];
+arr2[4] = arr2[3];
+arr2[3] = arr2[2];
+arr2[2] = arr2[1];
+arr2[1] = arr2[0];
+
+arr2[0] = temp;
+
+// This is poorly constructed, but it's the basic idea:
+
+var arr1 = ["1", "2", "3", "4", "5"];
+var arr2 = ["6", "7", "8", "9", "10"];
+
+function circle() {
+  var weeks = prompt("Number of weeks?");
+  var output = "";
+  for (var i = 0; i < weeks; i++) {
+    output += "<b>Week # " + (i+1) + "</b><br/>";
+    for (var j = 0; j < arr1.length; j++) {
+      output += arr1[j] + " VS " + arr2[j] + "<br/>";
+    }
+    var temp = arr1[0];
+    arr1[0] = arr1[1];
+    arr1[1] = arr1[2];
+    arr1[2] = arr1[3];
+    arr1[3] = arr1[4];
+    arr1[4] = arr2[4];
+    arr2[4] = arr2[3];
+    arr2[3] = arr2[2];
+    arr2[2] = arr2[1];
+    arr2[1] = arr2[0];
+    arr2[0] = temp;
+  }
+  document.getElementById('funDiv').innerHTML = output;
+}
+
+// Except circle shift would not allow teams to play every other team...
